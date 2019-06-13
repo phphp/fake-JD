@@ -1,0 +1,125 @@
+<!--pages/category/items.wxml-->
+
+<!-- 头部搜索框 -->
+<nav-search></nav-search>
+
+<!-- 工具栏 -->
+<view class="tool-bar">
+  <view 
+    class="tool-icon {{selectedOrder==0 | selectedOrder==2 | selectedOrder==3 ? 'selected-icon' : ''}}"
+    bindtap='showOrderList'>
+  {{selectedOrder==0 | selectedOrder==2 | selectedOrder==3 ? orderBy[selectedOrder].name : orderBy[0].name}} ▾
+  </view>
+  <view class="tool-icon {{selectedOrder==1 ? 'selected-icon' : ''}}"
+    bindtap='selectOrder' data-id="1">
+    销量
+  </view>
+  <view class="tool-icon" bindtap='showSoldOutList'>
+    <text wx:if="{{selectedStockType=='true'}}">有货 ▾</text>
+    <text wx:else>全部 ▾</text>
+  </view>
+  <view class="tool-icon" bindtap='showFilter'>筛选 ❖</view>
+</view>
+<!-- 工具栏 end -->
+
+<!-- 排序菜单 -->
+<view class="tool-list" wx:if="{{orderListTrigger}}">
+  <view bindtap='selectOrder' data-id="0">
+    综合
+    <icon wx:if="{{selectedOrder==0}}" type="success_no_circle" />
+  </view>
+  <view bindtap='selectOrder' data-id="2">
+    价格最低
+    <icon wx:if="{{selectedOrder==2}}" type="success_no_circle" />
+  </view>
+  <view bindtap='selectOrder' data-id="3">
+    价格最高
+    <icon wx:if="{{selectedOrder==3}}" type="success_no_circle" />
+  </view>
+</view>
+<!-- 排序菜单 end -->
+
+<!-- 有货菜单 -->
+<view class="tool-list" wx:if="{{soldOutListTrigger}}">
+  <view bindtap='getItemsByStock' data-stock="true">
+    优先显示有货
+    <icon wx:if="{{selectedStockType=='true'}}" type="success_no_circle"/>
+  </view>
+  <view bindtap='getItemsByStock' data-stock="false">
+    全部显示
+    <icon wx:if="{{selectedStockType=='false'}}" type="success_no_circle" />
+  </view>
+</view>
+<!-- 有货菜单 end -->
+
+<!-- 筛选菜单 -->
+<view class="filter-container" wx:if="{{filterTrigger}}">
+
+  <view class="filter-body">
+
+    <view class="filter-content">
+      <view class="filter-name">价格</view>
+      <view class="filter-value">
+        <input type='digit' placeholder="最低价"></input>
+        <view class="separate">-</view>
+        <input type='digit' placeholder="最高价"></input>
+      </view>
+    </view>
+
+    <!-- 属性选择 -->
+    <block wx:for="{{specPairs}}" wx:key="key">
+      <view class="filter-content">
+        <view class="filter-name">{{item.spec_name}}</view>
+        <view class="filter-value">
+          <block wx:for="{{item.values}}" wx:for-item="value" wx:key="valueKey">
+            <view class="button {{selectedSpecPairs[item.spec_id] == value.value_id  ? 'selected-button' : ''}}"
+              data-spec-id="{{item.spec_id}}"
+              data-value-id="{{value.value_id}}"
+              bindtap='selectSpec'
+              >{{value.value}}</view>
+          </block>
+        </view>
+      </view>
+    </block>
+    <!-- 属性选择 end -->
+
+  </view>
+
+  <view class="filter-footer">
+    <view class="cancel" bindtap='hideFilter'>取消</view>
+    <view class="confirm" bindtap='getItemsBySpec'>确认</view>
+  </view>
+
+</view>
+<!-- 筛选菜单 end -->
+
+<!-- 蒙版 -->
+<view class="dark-wrap" bindtap='hideWrap' wx:if="{{orderListTrigger || soldOutListTrigger }}"></view>
+<view class="filter-wrap" bindtap='hideWrap' wx:if="{{filterTrigger}}"></view>
+<!-- 蒙版 end -->
+
+<!-- 商品列表 -->
+<view class="product-container" style='position:{{positionFixed?"fixed":"static"}}'>
+  <block wx:for="{{spus}}" wx:key="key">
+
+    <view class="item" bindtap='showItem' data-item-id="{{item.skus[0].id}}">
+      <image src="{{item.skus[0].image.url}}"></image>
+      <view class="item-data">
+        <view class="name">{{item.name}}</view>
+        <view class="tag-container">
+          <!-- sku tags -->
+          <block wx:for="{{item.skus[0].specValues}}"
+            wx:for-item="specValue" wx:for-index="idx" wx:key="key">
+            <text class="tag" wx:if="{{idx < 3}}">{{specValue.value}}</text>
+          </block>
+        </view>
+
+        <view class="price">¥ {{item.skus[0].price}}</view>
+        <view class="sales-volume">已销售：{{item.sales_volume_str}}</view>
+      </view>
+    </view>
+
+  </block>
+</view>
+<!-- 商品列表 end -->
+

@@ -1,0 +1,51 @@
+<!--pages/user/user.wxml-->
+
+<view class="user-container">
+  <image class="user-avatar" src="{{user.avatar}}"></image>
+  <view class="user-data-container">
+    <text>欢迎回来，{{user.name}}</text>
+  </view>
+  <view class="pin">
+    <image bindtap='showPin' src="../../images/icon/pin.png"></image>
+  </view>
+  <view class="settings">
+    <image bindtap='showSettings' src="../../images/icon/settings.png"></image>
+  </view>
+</view>
+
+<view class="orders-container">
+  <view class="tab-container">
+    <text class="{{statusType == 'default' ? 'selected' : ''}}"
+      bindtap="fetchUserOrderByStatus"
+      data-status-id="default">最近订单</text>
+    <text class="{{statusType == '0' ? 'selected' : ''}}"
+      bindtap="fetchUserOrderByStatus"
+      data-status-id="0">未支付</text>
+    <text class="{{statusType == '2' ? 'selected' : ''}}"
+      bindtap="fetchUserOrderByStatus"
+      data-status-id="2">待收货</text>
+    <text class="{{statusType == '4' ? 'selected' : ''}}"
+      bindtap="fetchUserOrderByStatus"
+      data-status-id="4">已完成</text>
+  </view>
+
+  <view class="orders">
+    <block wx:for="{{orders}}" wx:key="key">
+      <view class="order">
+        <view class="order-title">
+          <text>订单号: {{item.order_id}}</text>
+          <text>{{item.status_name}}</text>
+        </view>
+        <view class="snap-container">
+          <image src="{{item.snap_image.url}}"></image>
+          <view class="snap-text-container">
+            <text src="snap-title">{{item.snap_name}}</text>
+            <text>{{JSON.parse(item.snap_content)}}</text> 
+            <text src="snap-price">实付金额 ¥{{item.total_price}} RMB</text>      
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+</view>

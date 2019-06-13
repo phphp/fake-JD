@@ -1,0 +1,71 @@
+/* pages/cart/ckeckout.wxss */
+
+page {
+  font-weight: 400;
+  font-size: 26rpx;
+  color: #666;
+}
+
+.title {
+  font-size: 32rpx;
+  text-align: center;
+  font-weight: 200;
+  margin: 30rpx 0;
+}
+
+.line {
+  margin: 0 20rpx;
+  border-bottom: 2rpx solid #EFEFEF;
+}
+
+.product-title {
+  font-size: 30rpx;
+  border: 200;
+  margin: 30rpx 30rpx;
+}
+
+.item {
+  overflow: hidden;
+  margin: 50rpx 30rpx;
+
+}
+.item image,
+.item view {
+  float: left;
+  min-height: 120rpx;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.item image {
+  width: 120rpx;
+  height: 120rpx;
+}
+.item-title {
+  width: 350rpx;
+  margin: 0 10rpx;
+}
+.item-count {
+  width: 50rpx;
+  text-align: center;
+}
+.item-price {
+  width: 150rpx;
+  text-align: center;
+}
+
+.subtotal {
+  margin: 20rpx 30rpx;
+  overflow: hidden;
+}
+.subtotal span {
+  float: right;
+}
+
+.confirm-order {
+  font-size: 28rpx;
+  line-height: 70rpx;
+  width: 500rpx;
+  margin: 60rpx auto 50rpx;
+  border-radius: 3rpx;
+}

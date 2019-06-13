@@ -1,0 +1,43 @@
+<!--pages/category/category.wxml-->
+
+<!-- 头部搜索框 -->
+<nav-search></nav-search>
+
+
+<!-- 分类列 -->
+<view class="categories-container">
+  <block wx:for="{{categories}}" wx:key="key">
+    <view class="category {{ activeCategoryIndex == index ? 'active-category' : '' }}"
+      data-tap-index="{{index}}" 
+      bindtap='show'>{{item.name}}</view>
+  </block>
+</view>
+
+<!-- 选中分类的子分类 -->
+<!-- 当子分类没有子分类时，全部显示 -->
+<view class="category-children" wx:if="{{!multiLevelCategories}}">
+  <view class="sub-category-title">分类</view>
+  <block wx:for="{{subCategories}}" wx:key="key">
+    <view class="sub-categories-container">
+      <view class="sub-category" data-category-id="{{item.id}}" bindtap="tapCategoryItem">
+        <image src="{{item.image.url}}"></image>
+        <view>{{item.name}}</view>
+      </view>
+    </view>
+  </block>
+</view>
+<!-- 当子分类有子分类时，子分类作为 title，其子分类作为内容 -->
+<view class="category-children" wx:else>
+  <block wx:for="{{subCategories}}" wx:key="key">
+    <view class="sub-category-title">{{item.name}}</view>
+    <block wx:for="{{item.all_children}}" wx:key="key">
+      <view class="sub-categories-container">
+        <view class="sub-category" data-category-id="{{item.id}}" bindtap="tapCategoryItem">
+          <image src="{{item.image.url}}"></image>
+          <view>{{item.name}}</view>
+        </view>
+      </view>
+    </block>
+  </block>
+</view>
+

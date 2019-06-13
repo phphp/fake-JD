@@ -1,0 +1,203 @@
+<!--pages/item/item.wxml-->
+
+<view class="main" style='position:{{ customerService || selectedSpec ? "fixed" : "static"}}'>
+
+  <!-- swiper -->
+  <swiper indicator-dots='true' autoplay='true' class="swiper">
+    <swiper-item>
+      <image src="{{sku.image.url}}" class="slide-image" />
+    </swiper-item>
+  </swiper>
+  <!-- swiper end -->
+
+  <!-- 商品信息 -->
+  <view class="container">
+    <view class="price"><text>¥ </text>{{sku.price}}</view>
+    <view class="title">{{spu.name}} {{sku.name}}</view>
+    <view class="desc">{{sku.description}}</view>
+
+    <view class="line"></view>
+
+    <view class="desc">促销信息*</view>
+
+    <view class="line"></view>
+
+    <!-- 筛选 -->
+    <view class="filter" bindtap="selectSpec">
+      <view>已选</view>
+      <view>
+        <block wx:for="{{sku.specValues}}" wx:key="key">
+          <text wx:if="{{item.spec_id == 1 || item.spec_id == 5}}">{{item.value}}, </text>
+        </block>
+        <text>{{buyNum}} 个</text>
+      </view>
+      <view>···</view>
+    </view>
+
+  </view>
+  <!-- 商品信息 end  -->
+
+  <!-- 描述导航 -->
+  <view class="mod-tab">
+    <view><span>商品介绍</span></view>
+    <view><span>规格参数</span></view>
+    <view><span>售后保障</span></view>
+  </view>
+  <!--描述导航 end  -->
+
+  <!-- 商品内容 -->
+  <view class="content">
+    <wxs module="splitContent">
+      var splitContent = {
+        index: function(sku) {
+          if (!sku) return []; // 防止获取参数前报错
+          return sku.content.split(';')
+        }
+      }
+      module.exports = {
+        index: splitContent.index
+      }
+    </wxs>
+    <block wx:for="{{splitContent.index(sku)}}" wx:key="key">
+      <image src="{{item}}" mode="widthFix"></image>
+    </block>
+  </view>
+  <!-- 商品内容 end  -->
+
+</view>
+
+
+
+
+
+<!-- 筛选框 -->
+<view class="select-spec" wx:if="{{selectedSpec}}">
+  <view class="dark-wrap" bindtap="cancelSelectSpec">
+  </view>
+  <view class="filter-content">
+
+    <view class="filter-sku">
+      <image src="{{sku.image.url}}" />
+      <view class="price"><text>¥ </text>{{sku.price}}</view>
+      <view class="title">{{spu.name}} {{sku.name}}</view>
+    </view>
+
+    <wxs module="isExists">
+      var isExists = {
+        index: function (arr, search) {
+          var include = false;
+          arr.forEach(function(value, key) {
+            if (value.value_id == search) include = true;
+          });
+          return include;
+        }
+      }
+      module.exports = {
+        index: isExists.index
+      }
+    </wxs>
+
+    <view wx:if="filter.color" class="desc" style="padding-top: 150rpx">颜色</view>
+    <view class="spec-container">
+      <block wx:for="{{filter.color}}" wx:key="key" wx:for-index="index">
+        <view class="spec-value-selected"
+          wx:if="{{isExists.index(sku.specValues, index)}}"
+          bindtap="tapSpec" data-color-index="{{index}}">
+          {{item}}
+        </view>
+        <view class="spec-value"
+          wx:else
+          bindtap="tapSpec" data-color-index="{{index}}">
+          {{item}}
+        </view>
+      </block>
+    </view>
+
+    <view wx:if="filter.version" class="desc" style="padding-top: 10rpx">版本</view>
+    <view class="spec-container">
+      <block wx:for="{{filter.version}}" wx:key="key" wx:for-index="index">
+        <view class="spec-value-selected"
+          wx:if="{{isExists.index(sku.specValues, index)}}"
+          bindtap="tapSpec" data-version-index="{{index}}">
+          {{item}}
+        </view>
+        <view class="spec-value" 
+          wx:else
+          bindtap="tapSpec" data-version-index="{{index}}">
+          {{item}}
+        </view>
+      </block>
+    </view>
+
+    <view class="desc" style="padding-top: 10rpx">数量</view>
+    <view class="spec-container buy-number">
+      <view bindtap="setNum" data-plus="true">+</view>
+      <input type="number" value="{{buyNum}}"></input>
+      <view bindtap="setNum" data-plus="false">-</view>
+    </view>
+
+  </view>
+</view>
+
+
+<!-- 底部 fixed 工具 -->
+<view class="footer-container">
+  <view class="footer-left">
+    <view class="footer-icon" bindtap='switchUserPage'>我的</view>
+    <view class="footer-icon" bindtap='switchCartPage'>购物车</view>
+  </view>
+
+  <view class="footer-right">
+    <view class="add-to-cart footer-icon" bindtap='addToCart'>加入购物车</view>
+    <view class="buy footer-icon">立即购买</view>
+  </view>
+</view>
+
+
+<!-- 客服 -->
+<image bindtap="showCustomerService" class="headset" src='../../images/icon/headset.png' />
+<view class="cs-container" wx:if="{{customerService}}" style='height:{{dialogContainerHeight}}px'>
+  <form bindsubmit="formSubmit">
+    <view class="dark-wrap" bindtap="cancelCustomerService"></view>
+    <view class="dialog-container">
+      <scroll-view class="dialog"
+        scroll-y
+        scroll-top="{{scrollTop}}"
+        style='height:{{dialogHeight}}px'
+      >
+        <block wx:for="{{dialog}}" wx:key="key">
+          <view wx:if="{{item.time}}" class="split-line">
+            <view></view>
+            <text>{{item.time}}</text>
+            <view></view>
+          </view>
+          <view class="message-container">
+            <view class="{{item.user == '我' ? 'user-name' : 'server-name'}}">{{item.user}}</view>
+
+            <view wx:if="{{item.user == '我'}}" class="user-message">
+              <view class="bubble-container"><view class="bubble"></view></view>
+              <view class="user-message-box">
+                <text>{{item.message}}</text>
+              </view>
+            </view>
+
+            <view wx:if="{{item.user != '我'}}" class="server-message">
+              <!-- <view class="bubble"></view> -->
+              <view class="bubble-container"><view class="bubble"></view></view>
+              <view class="server-message-box">
+                <text>{{item.message}}</text>
+              </view>
+            </view>
+
+          </view>
+        </block>
+      </scroll-view>
+      <view class="input-box">
+        <textarea placeholder="" auto-focus name="message" value="{{message}}" 
+          bindfocus="onFocus"
+          bindblur="onBlur"/>
+      </view>
+      <button form-type="submit">提交</button>
+    </view>
+  </form>
+</view>

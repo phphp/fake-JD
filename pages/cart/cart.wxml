@@ -1,0 +1,36 @@
+<!--pages/cart/cart.wxml-->
+
+<view class="title">SHOPPING CART</view>
+
+<view class="line"></view>
+
+<view class="product-title">PRODUCTS</view>
+
+<block wx:for="{{items}}" wx:key="key">
+  <view class="item">
+    <image src="{{item.image.url}}"></image>
+    <view class="item-title">{{item.name}}</view>
+    <view class="item-price">¥ {{item.price}} RMB</view>
+    <view class="item-count">
+      <picker bindchange="bindPickerChange" value="{{item.count-1}}" range="{{item.pickerArray}}" data-item-id='{{item.item_id}}'>
+        <view wx:if="{{!item.soldOut}}" class="picker">
+          QUANTITY: <text>{{item.pickerArray[item.count-1]}}</text>
+        </view>
+        <view wx:else class="picker">
+          QUANTITY: <text class="sold-out"> ({{item.soldOut}})</text>
+        </view>
+      </picker>
+
+      <view class="remove" bindtap='removeItem' data-item-id="{{item.item_id}}">Remove</view>
+    </view>
+  </view>
+</block>
+
+
+<view class="product-title">SUBTOTAL</view>
+
+<view class="subtotal">¥ {{subtotal}} RMB</view>
+
+<button bindtap='checkout' class="order-button">去结算</button>
+
+

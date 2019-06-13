@@ -1,0 +1,98 @@
+/* pages/user/user.wxss */
+
+.user-container {
+  background: linear-gradient(to right, #F0C27B, #4B1248);
+  height: 180rpx;
+  margin: 10rpx 10rpx;
+  padding: 15rpx;
+  border-radius: 8rpx;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.user-avatar {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 70rpx;
+  border: 4rpx solid #A66E55;
+  box-shadow: 0 0 10rpx #A66E55;
+}
+.user-data-container {
+  color: #FEFEFE;
+  margin-left: 15rpx;
+  font-size: 26rpx;
+}
+.pin {
+  position: absolute;
+  top: 30rpx;
+  right: 100rpx;
+}
+.pin image {
+  width: 40rpx;
+  height: 40rpx;
+}
+.settings {
+  position: absolute;
+  top: 30rpx;
+  right: 30rpx;
+}
+.settings image {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.orders-container {
+  background-color: #EFEFEF;
+  color: #555;
+  font-size: 24rpx;
+}
+.tab-container {
+  background-color: #FFF;
+  font-size: 26rpx;
+  border-top: 2rpx solid #EFEFEF;
+  border-bottom: 2rpx solid #EEE;
+  line-height: 68rpx;
+  display: flex;
+  padding: 0 10rpx;
+}
+.tab-container text {
+  flex: 1;
+  text-align: center;
+}
+.tab-container .selected {
+  border-bottom: 4rpx solid red;
+  color: red;
+}
+
+
+.orders {
+  padding: 0 10rpx;
+}
+.order {
+  background-color: #FFF;
+  border-radius: 8rpx;
+  margin: 15rpx 0;
+  padding: 15rpx 15rpx;
+}
+.order-title text:last-child {
+  float: right;
+}
+.order-title text {
+}
+.snap-container {
+  display: flex;
+}
+.snap-container image {
+  width: 140rpx;
+  height: 140rpx;
+}
+.snap-text-container {
+  display: flex;
+  flex-direction: column;
+  margin: 15rpx;
+
+}
+.snap-container text {
+  line-height: 70rpx;
+}
+

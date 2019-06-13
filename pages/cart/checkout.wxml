@@ -1,0 +1,30 @@
+<!--pages/cart/ckeckout.wxml-->
+
+<view class="title">确 认 订 单</view>
+
+<view class="product-title">商品</view>
+
+<view class="line"></view>
+
+<block wx:for="{{items}}" wx:key="key">
+  <view class="item">
+    <image src="{{item.image.url}}"></image>
+    <view class="item-title">{{item.name}}</view>
+    <view class="item-count">{{item.count}}</view>
+    <view class="item-price">{{item.price}}</view>
+  </view>
+</block>
+
+<view class="line"></view>
+
+<view class="product-title">总计</view>
+<view class="subtotal">商品价格： <span>¥ {{subtotal}} RMB</span></view>
+<view class="subtotal">运费: <span>¥ 0 RMB</span></view>
+
+<view class="line"></view>
+<view class="product-title">收货地址</view>
+<view class="line"></view>
+
+<button bindtap='confirmOrder' class="confirm-order" type="primary">确认订单</button>
+
+

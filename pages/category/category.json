@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "商品分类",
+  "usingComponents": {
+    "nav-search": "/components/nav-search"
+  },
+  "disableScroll": true
+}

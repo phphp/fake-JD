@@ -1,0 +1,48 @@
+<!--pages/address/address.wxml-->
+
+<view class="container">
+  <block wx:for="{{addresses}}" wx:key="key">
+
+    <view class="address-wrap">
+
+      <movable-area>
+        <movable-view
+          x="{{item.x}}"
+          data-item-index="{{index}}"
+          bindchange="showDelete" 
+          bindtouchstart="handleTouchStart"
+          bindtouchend="handleTouchEnd"
+          out-of-bounds="true"
+          direction="horizontal"
+          inertia="true"
+          >
+
+          <view class="address-container">
+            <view class="address">
+              <view class="address-title">
+                {{item.receiver}} {{item.phone}}
+              </view>
+              <view class="flexbox">
+                <view>
+                  <text wx:if="{{item.default == 1}}">默认</text>
+                  {{item.area.parent.parent.name}}
+                  {{item.area.parent.name}}
+                  {{item.area.name}}
+                  {{item.content}}
+                </view>
+              </view>
+            </view>
+            <view class="edit-address" bindtap="edit" data-address-id="{{item.address_id}}">编辑</view>
+          </view>
+
+        </movable-view>
+      </movable-area>
+
+      <view class="delete-icon" bindtap="delete" data-address-id="{{item.address_id}}" data-item-index="{{index}}">删除</view>
+
+    </view>
+
+  </block>
+</view>
+
+<view class="footer" bindtap="create">新增收货地址</view>

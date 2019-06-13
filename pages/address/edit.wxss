@@ -1,0 +1,24 @@
+/* pages/address/edit.wxss */
+
+.section {
+  overflow: hidden;
+  font-size: 26rpx;
+  border-bottom: 2rpx solid #CCC;
+}
+.section_title {
+  width: 180rpx;
+  float: left;
+  color: #999;
+  text-align: right;
+  margin-right: 20rpx;
+  line-height: 100rpx;
+}
+.section input {
+  width: calc(100% - 200rpx);
+  float: left;
+  height: 100rpx;
+}
+.section picker,
+.section switch {
+  line-height: 100rpx;
+}

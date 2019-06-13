@@ -1,0 +1,74 @@
+/* pages/cart/cart.wxss */
+
+page {
+  font-weight: 400;
+  font-size: 26rpx;
+  color: #666;
+}
+
+.title {
+  font-size: 32rpx;
+  text-align: center;
+  font-weight: 200;
+  margin: 40rpx 0;
+}
+.line {
+  width: 180rpx;
+  border-bottom: 2rpx solid #666;
+  margin: 0 auto;
+}
+.product-title {
+  font-size: 30rpx;
+  border: 200;
+  margin: 50rpx 120rpx;
+}
+
+.item {
+  margin: 20rpx 120rpx;
+}
+.item image {
+  width: 300rpx;
+  height: 300rpx;
+  margin: 0 115rpx;
+}
+.item-title {
+  color: rgb(221, 90, 90);
+  margin: 10rpx 0;
+}
+.item-price {
+  margin: 10rpx 0;
+}
+.item-count {
+  overflow: hidden;
+}
+.item-count text {
+  border-bottom: 1rpx solid #555;
+}
+.item-count .picker {
+  float: left;
+  width: 75%;
+}
+.sold-out {
+  color: rgb(221, 90, 90);
+}
+.item-count .remove {
+  float: right;
+  width: 25%;
+  text-align: right;
+}
+
+.order-button {
+  background-color: rgb(73, 76, 80);
+  font-size: 28rpx;
+  color: #FFF;
+  line-height: 70rpx;
+  width: 500rpx;
+  margin: 60rpx auto 50rpx;
+  border-radius: 3rpx;
+}
+
+.subtotal {
+  font-size: 28rpx;
+  font-weight: 600;
+  margin: 20rpx 120rpx;
+}

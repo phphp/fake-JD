@@ -1,0 +1,9 @@
+<!--components/nav-search.wxml-->
+
+<view class="search-container">
+  <view class="search-bar">
+    <view class="search-icon"><icon size="15" type="search"></icon></view>
+    <input class="search-input" type="text" placeholder='{{placeholder}}'></input>
+  </view>
+</view>
+

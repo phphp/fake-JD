@@ -1,0 +1,16 @@
+/* pages/login/register.wxss */
+
+.container {
+  font-size: 30rpx;
+  color: #777;
+  margin-top: 80rpx
+}
+
+.container button,
+.container view {
+  margin: 30rpx 60rpx;
+}
+
+.container view:last-child {
+  text-align: right;
+}

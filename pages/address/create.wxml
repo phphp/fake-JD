@@ -1,0 +1,47 @@
+<!--pages/address/create.wxml-->
+
+<view class="container">
+
+  <form bindsubmit="formSubmit">
+
+    <view class="section">
+      <view class="section_title">收货人</view>
+      <input name="receiver" placeholder="姓名" type="text"/>
+    </view>
+
+    <view class="section">
+      <view class="section_title">联系方式</view>
+      <input name="phone" placeholder="手机号码" type="number"/>
+    </view>
+
+    <view class="section">
+      <view class="section_title">所在地区</view>
+      <picker 
+        mode="region" 
+        bindchange="bindRegionChange" 
+        value="{{region}}" 
+        custom-item="{{customItem}}"
+        >
+        <view class="picker">
+          {{region[0]}}，{{region[1]}}，{{region[2]}}
+        </view>
+      </picker>
+    </view>
+
+    <view class="section">
+      <view class="section_title">详细地址</view>
+      <input name="content" placeholder="楼栋楼层或房间号码信息" type="text"/>
+    </view>
+
+    <view class="section section_gap">
+      <view class="section_title">默认收货地址</view>
+      <switch name="default"/>
+    </view>
+
+    <view class="btn-area">
+      <button form-type="submit">确认</button>
+    </view>
+  </form>
+
+</view>
+

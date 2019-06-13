@@ -1,0 +1,15 @@
+<!--pages/login/register.wxml-->
+
+<div class="container">
+
+  <view style='margin-top: 180rpx'>欢迎来到 XXX</view>
+
+  <view>为了能够提供更好的服务，XXX 需要获取以下信息用于会员功能：</view>
+
+  <view style='margin-left: 100rpx'>1. 您的公开信息（昵称、头像等）</view>
+
+  <button type="primary" open-type="getUserInfo" bindgetuserinfo="sendUserInfoAndGetToken">确认微信授权</button>
+
+  <view>暂不授权</view>
+
+</div>

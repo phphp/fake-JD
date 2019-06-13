@@ -1,0 +1,93 @@
+/* pages/address/address.wxss */
+
+/* movable-view  */
+.address-wrap {
+  position: relative;
+  border-bottom: 2rpx solid #DDD;
+}
+.container .address-wrap:last-child {
+  /* footer 预留高度 */
+  margin-bottom: 100rpx;
+}
+movable-area {
+  width: calc(100% - 160rpx);
+  height: 160rpx;
+}
+movable-view {
+  width: 100vw;
+  height: 160rpx;
+  z-index: 2;
+  background-color: #FFF;
+}
+.delete-icon {
+  width: 160rpx;
+  height: 160rpx;
+  line-height: 160rpx;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  background-color: #E66671;
+  color: #FFF;
+  font-size: 26rpx;
+}
+
+
+.address-container {
+  overflow: hidden;
+  height: 160rpx;
+}
+.address {
+  float: left;
+  margin: 10rpx 10rpx 10rpx 50rpx;
+  width: calc(100% - 240rpx);
+}
+.address .address-title {
+  font-size: 26rpx;
+  line-height: 60rpx;
+  font-weight: bolder;
+}
+.address .flexbox {
+  font-size: 26rpx;
+  color: #999;
+  height: 80rpx;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.flexbox view {
+  width: 100%;
+  line-height: 40rpx;
+}
+.flexbox text {
+  color: #FB001F;
+  font-size: 22rpx;
+  line-height: 26rpx;
+  border: 2rpx solid #FB001F;
+  border-radius: 4rpx;
+  margin-right: 10rpx;
+}
+.edit-address {
+  float: right;
+  line-height: 180rpx;
+  margin-right: 20rpx;
+  color: #FB001F;
+  font-size: 26rpx;
+  width: 100rpx;
+  text-align: center;
+}
+
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 3;
+  text-align: center;
+  font-size: 30rpx;
+  line-height: 100rpx;
+  background-color: #E66671;
+  color: #FFF;
+}
