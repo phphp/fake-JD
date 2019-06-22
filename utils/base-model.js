@@ -4,7 +4,7 @@
  *  1. 引入 base-model.js 文件
  *  2. model extend BaseModel
  *  3. 在 model 的构造函数调用基类的构造函数 super();
- * 
+ *
  * 可以作为模型类父类，也可以实例化后调用。
  */
 class BaseModel {
@@ -21,13 +21,13 @@ class BaseModel {
 
   /**
    * Promise 封装 wx.request
-   * 
+   *
    * 作用：
    *    需要登录用户访问的请求，会自动检查是否已经登录，没有登录的用户会先跳转授权页面再返回
    *    如果请求返回 401 结果，会尝试刷新一次 token，刷新成功后重新发送请求，刷新失败则跳转授权页面再次登录
-   * 
+   *
    * 使用方法
-   * 
+   *
     baseModel.request({
       token: true,
       url: 'wx/needlogin',
@@ -37,7 +37,31 @@ class BaseModel {
     }).catch(err => {
       console.log(err);
     })
-   * 
+
+    // 同步执行用法，可以用 IIFE，或者在生命周期函数之前加 async
+    (async () => {
+      try {
+        await categoryModel.request({
+          token: true,
+          url: 'wx/needlogin',
+          method: 'POST'
+        }).then(res => {
+          console.log(res);
+        })
+
+        await categoryModel.request({
+          token: true,
+          url: 'wx/needlogin',
+          method: 'POST'
+        }).then(res => {
+          console.log(res);
+        })
+      } catch(e) {
+        console.log(e);
+      }
+    })();
+
+   *
    * @param params 参数对象
    *    url 请求地址
    *    fullUrl 请求全地址，和 url 二选一，带上域名的地址，会覆盖 url 项
@@ -141,7 +165,7 @@ class BaseModel {
           reject(err);
         }
       })
-      
+
     })
   }
 
@@ -205,13 +229,8 @@ class BaseModel {
    * 通常用于事件返回尺寸（px）转换成 rpx
    */
   px2rpx(px) {
-    let rpx;
-    wx.getSystemInfoSync({
-      success: (res) => {
-        rpx = px * 750 / res.windowWidth; 
-      } 
-    })
-    return rpx;
+    const res = wx.getSystemInfoSync()
+    return px * 750 / res.windowWidth;
   }
   /**
    * 和上面相反
@@ -219,7 +238,7 @@ class BaseModel {
   rpx2px(rpx) {
     const res = wx.getSystemInfoSync()
     return rpx / 750 * res.windowWidth;
-  } 
+  }
 
 
 
